@@ -1,0 +1,323 @@
+:root {
+  --fg:#111;
+  --muted:#666;
+  --bg:#fff;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+html, body {
+  margin:0;
+  height:100%;
+  font-family:'Noto Sans TC','Helvetica Neue',Arial,sans-serif;
+  color:var(--fg);
+  background:var(--bg);
+}
+
+a {
+  color:var(--fg);
+  text-decoration:none;
+}
+a:hover { opacity:.85; }
+
+/* ======================== */
+/* Header（保留原設計） */
+/* ======================== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,.96);
+}
+
+header, .header-inner, .header-inner * {
+  margin: 0;
+  line-height: 1;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 80px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-left img {
+  height: 45px;
+  width: auto;
+  display: block;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.35;
+}
+.brand .cn {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .4px;
+  margin-bottom: 6px;
+}
+.brand .en {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+}
+
+.header-right {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  margin-top: -4px;
+}
+
+.contact {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.2;
+  white-space: nowrap;
+  margin-top: 3.2px;
+}
+
+.nav {
+  display: flex;
+  gap: 14px;
+  font-size: 13px;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.nav a {
+  color: var(--fg);
+  opacity: .65;
+  text-decoration: none;
+  transition: .25s;
+}
+.nav a:hover { opacity: 1; }
+.nav a.active { opacity: 1; font-weight: 500; }
+
+/* ======================== */
+/* Gallery（首頁作品牆） */
+/* ======================== */
+.gallery {
+  column-count: 5;
+  column-gap: 32px;
+  padding: 30px 80px 60px;
+}
+.card {
+  break-inside: avoid;
+  margin: 0 0 28px;
+  background: #fff;
+  display: block;
+}
+.thumb { width: 100%; height: auto; display: block; }
+.caption {
+  padding: 8px 10px;
+  border-top: 1px solid #eee;
+}
+.caption .title {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+.caption .meta {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+  line-height: 1.2;
+}
+
+/* ======================== */
+/* Footer */
+/* ======================== */
+footer {
+  padding: 40px 80px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ======================== */
+/* Responsive */
+/* ======================== */
+@media (max-width:1200px) {
+  .gallery { column-count: 3; }
+}
+
+@media (max-width:900px) {
+  .gallery { column-count: 2; }
+  .header-inner { padding: 18px 40px; }
+  .header-right { gap: 16px; }
+}
+
+@media (max-width:600px) {
+  .header-inner {
+    width: 100%;
+    padding: 16px 20px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .header-left img { height: 42px; }
+  .brand .cn { font-size: 16px; font-weight: 700; }
+  .brand .en { font-size: 12.5px; letter-spacing: 0.6px; }
+  .contact { display: none !important; }
+  .nav { gap: 18px; font-size: 13px; }
+  .gallery {
+    column-count: 1;
+    padding: 0 20px 20px;
+  }
+  footer { padding: 30px 20px; font-size: 11px; }
+}
+
+/* ============================== */
+/* ✅ Project 單頁 */
+/* ============================== */
+
+.page-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px 80px;  /* ✅ 加底部留白 */
+  box-sizing: border-box;
+}
+
+/* Hero 區（桌機使用） */
+.project-hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+.project-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+.project-hero img.active { opacity: 1; }
+
+/* ✅ HERO 左右箭頭 */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 42px;
+  color: rgba(199, 198, 198, 0.85);
+  padding: 8px 14px;
+  cursor: pointer;
+  z-index: 20;
+  opacity: 0.7;
+  user-select: none;
+  transition: opacity .25s;
+}
+.hero-arrow:hover { opacity: 1; }
+.hero-arrow.left { left: 12px; }
+.hero-arrow.right { right: 12px; }
+
+/* photo/caption */
+.photo-info-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+.thumb-dots { display: none; }
+
+.img-caption {
+  flex-grow: 1;
+  text-align: right;
+  font-size: 12px;
+  color: #444;
+  line-height: 1.2;
+  position: relative;
+  top: -2px;
+}
+
+/* 作品內文 */
+.project-info {
+  margin-top: 20px;
+  margin-bottom: 60px;
+  line-height: 1.55;
+}
+.project-info h1 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.project-meta {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.project-meta div { margin-bottom: 6px; }
+
+.project-desc p {
+  margin-top: 0;
+  margin-bottom: 12px;
+  text-align: justify;
+  text-align-last: left;
+  color: #111;
+}
+
+/* 🔧 平板留白對齊首頁 */
+@media (max-width:900px) {
+  .page-wrap { padding: 0 40px 120px; }
+}
+@media (max-width:600px) {
+  .page-wrap { padding: 0 20px 100px; }
+}
+
+/* ============================== */
+/* ✅ Project Nav */
+/* ============================== */
+.project-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 80px;
+  margin: 60px 0 100px;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.project-nav a {
+  color: var(--fg);
+  opacity: .65;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: .3px;
+  transition: opacity .25s;
+}
+.project-nav a:hover { opacity: 1; }
+
+@media (max-width:900px) {
+  .project-nav { padding: 0 40px; }
+}
+
+@media (max-width:600px) {
+  .project-nav {
+    padding: 0 20px;
+    margin-bottom: 80px;
+  }
+}
